@@ -21,6 +21,15 @@ bookRouter.route('/books')
     });
   });
 
+bookRouter.route('/books/:bookId')
+  .get((req, res) => {
+    Book.findById(req.params.bookId, (err, books) => {
+      if (err) {
+        return res.send(err);
+      } return res.json(books);
+    });
+  });
+
 app.use('/API', bookRouter);
 
 app.get('/', (req, res) => {
